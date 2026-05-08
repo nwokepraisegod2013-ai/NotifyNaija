@@ -9,19 +9,18 @@ return [
     'connections' => [
 
         'pgsql' => [
-            'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', null),
-            'port' => env('DB_PORT', 5432),
-            'database' => env('DB_DATABASE', null),
-            'username' => env('DB_USERNAME', null),
-            'password' => env('DB_PASSWORD', null),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'require',
-        ],
+    'driver' => 'pgsql',
+    'url' => env('DATABASE_URL'),
+    'host' => env('DB_HOST'),
+    'port' => env('DB_PORT', '5432'),
+    'database' => env('DB_DATABASE'),
+    'username' => env('DB_USERNAME'),
+    'password' => env('DB_PASSWORD'),
+    'charset' => 'utf8',
+    'prefix' => '',
+    'schema' => 'public',
+    'sslmode' => 'require',
+],
 
         'mysql' => [
             'driver' => 'mysql',
