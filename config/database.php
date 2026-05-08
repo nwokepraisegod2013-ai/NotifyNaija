@@ -4,67 +4,61 @@ use Illuminate\Support\Str;
 
 return [
 
+    /*
+    |--------------------------------------------------------------------------
+    | Default Database Connection
+    |--------------------------------------------------------------------------
+    */
     'default' => env('DB_CONNECTION', 'pgsql'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Database Connections
+    |--------------------------------------------------------------------------
+    */
     'connections' => [
 
         'pgsql' => [
-    'driver' => 'pgsql',
-    'url' => env('DATABASE_URL'),
-    'host' => env('DB_HOST'),
-    'port' => env('DB_PORT', '5432'),
-    'database' => env('DB_DATABASE'),
-    'username' => env('DB_USERNAME'),
-    'password' => env('DB_PASSWORD'),
-    'charset' => 'utf8',
-    'prefix' => '',
-    'schema' => 'public',
-    'sslmode' => 'require',
-],
+            'driver' => 'pgsql',
 
-        'mysql' => [
-            'driver' => 'mysql',
-            'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'notification_system'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
+            // ❌ DO NOT use DATABASE_URL (causes conflicts on Render)
+            'host' => env('DB_HOST'),
+            'port' => env('DB_PORT', 5432),
+            'database' => env('DB_DATABASE'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
+
+            'charset' => 'utf8',
             'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
+            'schema' => 'public',
+
+            // Render-safe SSL requirement
+            'sslmode' => 'require',
         ],
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Migrations Table
+    |--------------------------------------------------------------------------
+    */
     'migrations' => [
         'table' => 'migrations',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Redis (DISABLED FOR PRODUCTION STABILITY)
+    |--------------------------------------------------------------------------
+    */
     'redis' => [
 
-        'client' => env('REDIS_CLIENT', 'phpredis'),
+        // ⚠️ Disabled fallback behavior
+        'client' => null,
 
-        'options' => [
-            'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => Str::slug(env('APP_NAME', 'app')) . '_database_',
-        ],
-
-        'default' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => 0,
-        ],
-
-        'cache' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => 1,
-        ],
+        'default' => null,
+        'cache' => null,
 
     ],
 
